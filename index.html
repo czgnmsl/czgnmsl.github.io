@@ -3,20 +3,59 @@
         <meta charset="utf-8">
         <title>战の灵堂</title>
     </head>
-    <body style="background-color: darkgray;text-align: center;">
-        <img src="border-h.png" style="width:37.5%;margin-top: 0.5%;">
-        <div style="font-size:400%;color: white;margin-top: -6.3%;">万世千秋葬妈人</div>
+    <body style="background: url('bg.jpg') no-repeat;background-size:100% 100%;text-align: center;">
+        <img src="border-h.png" style="width:720px;margin-top: 32px;">
+        <div style="font-size:92px;color: white;margin-top: -116px;">万世千秋葬妈人</div>
         
-        <img src="border-v.png" style="width:37.5%;position:absolute;left:27.5%;width:8%;height:70%;margin-top: 2.5%;">
-        <div style="font-size:250%;color: white;position:absolute;left:30%;width: 1px;margin-top: 4%;">愁高中三载师生怨满胸</div>
+        <img src="border-v.png" style="width:720px;position:absolute;left:336px;width:154px;height:656px;margin-top: 40px;">
+        <div style="font-size:54px;color: white;position:absolute;left:384px;width: 1px;margin-top: 72px;">愁高中三载师生怨满胸</div>
 
-        <img src="border-v.png" style="width:37.5%;position:absolute;right:27.5%;width:8%;height:70%;margin-top: 2.5%;">
-        <div style="font-size:250%;color: white;position:absolute;right:33%;width: 1px;margin-top: 4%;">阴气胜地府学生坠半空</div>
+        <img src="border-v.png" style="width:720px;position:absolute;right:336px;width: 154px;height:656px;margin-top: 40px;">
+        <div style="font-size:54px;color: white;position:absolute;right:441px;width: 1px;margin-top: 72px;">阴气胜地府学生坠半空</div>
+        
+        <img src="czg.jpg" style="width: 192px;border-radius: 5%;border: 12px solid;margin-top: 65px;"><br>
+        <img src="tie.png" style="width: 72px;left: 926px;margin-top: 47px;margin-top: -282px;">
 
-        <!--<div style="font-size:1000%;color: black;margin-top: 2%;">奠</div>-->
+        <div style="font-size:52px;color: black;margin-top: 320px">陈战耕<br>1975-2022</div>
         <!--男，汉族，1975年12月生，浙江景宁人，民进会员，1996年8月参加工作，在职大学学历。现任景宁畲族自治县教育局副局长、景宁中学校长。-->
-        <img src="czg.jpg" style="width:15%;border-radius: 5%;border: 12px solid;margin-top: 7%;">
-        <div style="font-size:200%;color: black;margin-top: 3%">陈战耕<br>1975-2022</div>
-        
+        <div style="font-size:39px;color: black;margin-top: 40px">目前已经有<a id="count">?</a>人访问了这个死妈东西的灵堂</div> 
+        <div style="font-size:39px;color: black;">它的天地银行账户余额:<br><a id="wallet">?</a>冥币</div>
+        <input type="text" id="donate" placeholder="输入纸钱(债券)面额">
+        <button onclick="burn(document.getElementById('donate').value)">烧纸钱</button>
     </body>
+    <footer>
+        <script>
+            function burnx(){
+                
+            }
+
+            function burn(count){
+                var req=new XMLHttpRequest();
+                
+                req.onreadystatechange=function(){
+                    if(req.status==200 && req.responseText!=""){
+                        document.getElementById("wallet").innerHTML=req.responseText
+                    }
+                }
+
+                req.open("POST","http://api.kmder.cn:811/rip/burn")
+                req.send(count)
+            }
+            burn(0)
+
+            function init(){
+                var req=new XMLHttpRequest();
+                
+                req.onreadystatechange=function(){
+                    if(req.status==200 && req.responseText!=""){
+                        document.getElementById("count").innerHTML=req.responseText
+                    }
+                }
+
+                req.open("POST","http://api.kmder.cn:811/rip/getcount")
+                req.send()
+            }
+            init()
+        </script>
+    </footer>
 </html>
